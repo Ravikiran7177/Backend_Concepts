@@ -1,0 +1,20 @@
+package com.example.demo.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Dao.Repo;
+import com.example.demo.Pojo.Login;
+
+@Service
+public class ServiceImpl implements ServiceInterface{
+	
+	@Autowired
+	private Repo repo;
+	
+	@Override
+	public Login insert(Login login) {
+		return repo.save(login);
+	}
+	
+}

@@ -1,0 +1,40 @@
+package com.example.demo.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Dao.Repo;
+import com.example.demo.Pojo.FoodItems;
+import com.example.demo.Pojo.Login;
+
+
+@Service
+public class ServiceImpl implements ServiceInterface{
+	
+	@Autowired
+	private Repo repo;
+	
+	@Override
+	public Login insert(Login login) {
+		return repo.save(login);
+	}
+	
+	@Override
+	public String findByEmailAndPassword(String email, String password) {
+		List<Login> users=repo.findByEmailAndPassword(email,password);
+		if (!users.isEmpty()) {
+            return "1"; 
+        } else {
+            return "2";
+        }
+	}
+
+	@Override
+	public FoodItems insert(FoodItems fooditems) {
+		return repo.save(fooditems);
+	}
+	
+}

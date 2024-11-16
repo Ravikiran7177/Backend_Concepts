@@ -1,0 +1,17 @@
+package com.example.demo.Service;
+
+import java.util.List;
+
+import com.example.demo.Pojo.Login;
+
+public interface ServiceInterface {
+
+	Login insert(Login login);
+
+	public List<Login> findByEmailAndPassword(String email, String password);
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,27 @@
+package com.example.demo.Service;
+
+import java.util.List;
+
+import com.example.demo.Pojo.FoodItems;
+import com.example.demo.Pojo.ItemsClick;
+import com.example.demo.Pojo.Login;
+
+public interface ServiceInterface {
+
+	Login insert(Login login);
+
+	public String findByEmailAndPassword(String email, String password);
+	
+	public FoodItems insert(FoodItems fooditems);
+	
+	public List<FoodItems> findAll();
+	
+	 List<FoodItems> findByName(String name);
+
+	 FoodItems findById(int id);
+
+	ItemsClick insert(ItemsClick itemsclick);
+
+	List<ItemsClick> findAll1();
+	
+}

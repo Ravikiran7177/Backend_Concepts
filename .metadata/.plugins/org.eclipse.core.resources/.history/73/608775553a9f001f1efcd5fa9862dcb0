@@ -1,0 +1,22 @@
+package com.example.demo.Contloller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.Pojo.Login;
+import com.example.demo.Service.ServiceInterface;
+
+@RestController
+public class MyController {
+	
+	@Autowired
+	private ServiceInterface service;
+	
+	@PostMapping("/path")
+	public Login postMethodName(@RequestBody Login login) {
+		return service.insert(login);
+	}
+	
+}

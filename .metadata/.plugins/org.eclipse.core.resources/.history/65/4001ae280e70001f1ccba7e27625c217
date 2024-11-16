@@ -1,0 +1,83 @@
+package com.example.demo.Repository;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.Pojo.User;
+
+@Repository
+public class Repo {
+	// insert
+	public User insertUser(User user) throws SQLException, ClassNotFoundException {
+		String url="jdbc:mysql://localhost:3306/ravi";
+    	Class.forName("com.mysql.cj.jdbc.Driver");
+    	Connection con=DriverManager.getConnection(url,"root","root");
+    	String q="insert into userdetail values(?,?,?,?,?)";
+    	PreparedStatement pst=con.prepareStatement(q);
+    	pst.setString(1, user.getUsername());
+    	pst.setString(2, user.getEmail());
+    	pst.setInt(3, user.getMobileno());
+    	pst.setInt(4, user.getAge());
+    	pst.setInt(5, user.getId());
+    	pst.executeUpdate();
+    	return user;
+	}
+	
+	//delete
+	public int deleteUser(int id) throws SQLException, ClassNotFoundException {
+		
+		String url="jdbc:mysql://localhost:3306/ravi";
+    	Class.forName("com.mysql.cj.jdbc.Driver");
+    	Connection con=DriverManager.getConnection(url,"root","root");
+    	String q="delete from userdetail where id=?";
+    	PreparedStatement pst=con.prepareStatement(q);
+    	pst.setInt(1,id);
+    	pst.executeUpdate();
+		return id;
+    	
+	}
+	
+	//update
+	public User updateUser(User user) throws SQLException, ClassNotFoundException {
+		String url="jdbc:mysql://localhost:3306/ravi";
+    	Class.forName("com.mysql.cj.jdbc.Driver");
+    	Connection con=DriverManager.getConnection(url,"root","root");
+    	String q="update username set age=? where id=? ";
+    	PreparedStatement pst=con.prepareStatement(q);
+    	pst.setInt(1, user.getAge());
+    	pst.setInt(2, user.getId());
+    	pst.executeUpdate();
+    	return user;
+	}
+	
+	//select
+	public List<User> selectLaptop(User user) throws SQLException, ClassNotFoundException {
+		List<User> li=new ArrayList<User>();
+		
+		String url="jdbc:mysql://localhost:3306/ravi";
+    	Class.forName("com.mysql.cj.jdbc.Driver");
+    	Connection con=DriverManager.getConnection(url,"root","root");
+    	String q="select * from userdetail";
+    	PreparedStatement pst=con.prepareStatement(q);
+    	ResultSet rs=pst.executeQuery();
+    	while(rs.next()) {
+    		User user1=new User();
+    		user1.setUsername(rs.getString(1));
+    		user1.setEmail(rs.getString(2));
+    		user1.setMobileno(rs.getInt(3));
+    		user1.setAge(rs.getInt(4));
+    		user1.setId(rs.getInt(5));
+    		li.add(user1);
+    	}
+    	return li;
+	}
+	
+	
+}

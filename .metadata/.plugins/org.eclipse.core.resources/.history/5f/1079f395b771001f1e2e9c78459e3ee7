@@ -1,0 +1,20 @@
+package utility;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Singleton {
+	
+	public static Connection getConnection(Connection con) throws ClassNotFoundException, SQLException {
+		if(con==null) {
+			String url="jdbc:mysql://localhost:3306/ravi";
+	    	Class.forName("com.mysql.cj.jdbc.Driver");
+	    	System.out.println("null");
+	    	return DriverManager.getConnection(url,"root","root");
+		}else {
+			System.out.println("not null");
+			return con;
+		}
+	};
+	
+}

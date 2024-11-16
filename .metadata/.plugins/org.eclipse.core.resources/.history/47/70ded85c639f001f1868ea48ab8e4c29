@@ -1,0 +1,43 @@
+package com.example.demo.Contloller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.Pojo.FoodItems;
+import com.example.demo.Pojo.Login;
+import com.example.demo.Service.ServiceInterface;
+
+@RestController
+@CrossOrigin
+public class MyController {
+	
+	@Autowired
+	private ServiceInterface service;
+	
+	@PostMapping("/path")
+	public Login postMethodName(@RequestBody Login login) {
+		return service.insert(login);
+	}
+	
+	@GetMapping("/check/{email}/{password}")
+	public String findByEmailAndPassword(@PathVariable String email,@PathVariable String password) {
+		return service.findByEmailAndPassword(email,password);
+	}
+	
+	@PostMapping("/insert")
+	public FoodItems postMethodName(@RequestBody FoodItems fooditems){
+		return service.insert(fooditems);
+	}
+	
+	@GetMapping("/")
+	public List<FoodItems> findAll() {
+		return service.findAll();
+	}
+}
